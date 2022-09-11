@@ -1,0 +1,14 @@
+applications:
+- api_domain: api.staging.jit.io
+  application_name: https://platform.staging.com
+  authentication_mode: selenium
+  exclude_paths:
+  - https://platform.staging.com/logout
+  - ' https://api.staging.jit.io/tenant/delete'
+  login_page_url: https://platform.staging.com/login
+  password: encrypted$AQICAHhD0n+Eqj0ZEMtRnCrRxu94Uld5QbHB2HR/ubkb7SdCcgEfKd5pwgwDSa4R1BeMumErAAAAaDBmBgkqhkiG9w0BBwagWTBXAgEAMFIGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMqqGV1qk0B9N1aYwVAgEQgCU2iW8ciWNVhsFWICYViU40vGJo9WMLJgKELKSmDxVHHxZN9MTe
+  password_css_selector: '[data-test-id=input-password]'
+  target_url: https://platform.staging.com
+  type: api
+  username: ohav+testuserdev@jit.io
+  username_css_selector: '[data-test-id=input-email]'
