@@ -12,6 +12,3 @@ items:
     uses: jitsecurity-controls/jit-plans/items/runtime/item-api-security.yml@latest
   - name: Scan code dependencies for vulnerabilities
     uses: jitsecurity-controls/jit-plans/items/code/item-dependency-check.yml@latest
-  - name: Run a web application scanner
-    uses: >-
-      jitsecurity-controls/jit-plans/items/runtime/item-web-app-scanner.yml@latest
