@@ -7,7 +7,4 @@ owners:
 references:
   - https://www.jit.io
 tags: []
-items:
-  - name: Scan code for vulnerabilities
-    uses: >-
-      jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
+items: []
