@@ -7,4 +7,6 @@ owners:
 references:
   - https://www.jit.io
 tags: []
-items: []
+items:
+  - name: Scan your code dependencies for vulnerabilities (SCA)
+    uses: jitsecurity-controls/jit-plans/items/code/item-dependency-check.yml@latest
