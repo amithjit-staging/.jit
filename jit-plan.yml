@@ -7,4 +7,6 @@ owners:
 references:
   - https://www.jit.io
 tags: []
-items: []
+items:
+  - name: Scan code dependencies for vulnerabilities
+    uses: jitsecurity-controls/jit-plans/items/code/item-dependency-check.yml@latest
