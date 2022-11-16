@@ -7,4 +7,7 @@ owners:
 references:
   - https://www.jit.io
 tags: []
-items: []
+items:
+  - name: Scan infrastructure for runtime misconfigurations
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
