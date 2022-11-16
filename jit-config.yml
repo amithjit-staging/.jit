@@ -37,3 +37,10 @@ plan_items:
       tags:
       - staging
       trigger: deployment
+  item-api-security:
+    my-staging:
+      configuration:
+      - zap-stg-api
+      tags:
+      - staging
+      trigger: deployment
