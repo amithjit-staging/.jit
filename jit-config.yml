@@ -1,5 +1,3 @@
-
-
 applications:
 - api_domain: https://platform.staging.jit.io/
   application_name: zap-stg-api
@@ -17,18 +15,25 @@ applications:
   exclude_paths: []
   target_url: https://platform.staging.jit.io/
   type: web
-- application_name: 'prowler-staging'
+- account_ids:
+  - 053588668385
+  application_name: prowler-staging
   type: aws_configuration
-  account_ids:
-    - 053588668385
-plan_items:
-  item-runtime-misconfiguration-detection:
-    my-staging:
-      tags:
-      - 'staging'
-      configuration:
-      - 'prowler-staging'
-      trigger: 'deployment'
+aws:
+- account_id: 053588668385
+  account_name: AccountThree
+  deploy_region: us-east-1
+  regions:
+  - us-east-1
+  type: account
 deployment:
   environments:
   - staging
+plan_items:
+  item-runtime-misconfiguration-detection:
+    my-staging:
+      configuration:
+      - prowler-staging
+      tags:
+      - staging
+      trigger: deployment
