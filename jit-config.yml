@@ -29,3 +29,18 @@ aws:
 deployment:
   environments:
   - staging
+plan_items:
+  item-runtime-misconfiguration-detection:
+    my-staging:
+      configuration:
+      - prowler-staging
+      tags:
+      - staging
+      trigger: deployment
+  item-api-security:
+    my-staging:
+      configuration:
+      - zap-stg-api
+      tags:
+      - staging
+      trigger: deployment
