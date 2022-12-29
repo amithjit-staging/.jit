@@ -19,13 +19,6 @@ applications:
   - 053588668385
   application_name: prowler-staging
   type: aws_configuration
-aws:
-- account_id: 053588668385
-  account_name: AccountThree
-  deploy_region: us-east-1
-  regions:
-  - us-east-1
-  type: account
 deployment:
   environments:
   - staging
