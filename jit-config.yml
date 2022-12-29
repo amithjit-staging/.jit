@@ -15,10 +15,6 @@ applications:
   exclude_paths: []
   target_url: https://platform.staging.jit.io/
   type: web
-- account_ids:
-  - 053588668385
-  application_name: prowler-staging
-  type: aws_configuration
 deployment:
   environments:
   - staging
