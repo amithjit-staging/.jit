@@ -8,8 +8,6 @@ references:
   - https://www.jit.io
 tags: []
 items:
-  - name: Scan your API for vulnerabilities
-    uses: jitsecurity-controls/jit-plans/items/runtime/item-api-security.yml@latest
   - name: Scan infrastructure for runtime misconfigurations
     uses: >-
       jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection.yml@latest
