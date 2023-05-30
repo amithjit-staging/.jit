@@ -9,6 +9,7 @@ jobs:
   docker-scan:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'docker-scan'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: trivy
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -26,6 +27,7 @@ jobs:
   enrich:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'enrich'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: enrichment
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -40,9 +42,28 @@ jobs:
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
 
+  remediation-pr:
+    if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'remediation-pr'
+    runs-on: ubuntu-20.04
+    timeout-minutes: 20
+    steps:
+    - name: remediation-pr
+      uses: jitsecurity-controls/jit-github-action@v2.2
+      with:
+        docker_user: jit-bot
+        docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
+        
+        security_control: ghcr.io/jitsecurity-controls/open-remediation-pr-alpine:main
+        security_control_args: --github-token ${{fromJSON(github.event.inputs.client_payload).payload.github_token}} --fix-pr-config ${{fromJSON(github.event.inputs.client_payload).payload.fix_pr_config}} --output-file \$REPORT_FILE
+        security_control_output_file: /opt/code/jit-report/results.json
+        dispatch_type: workflow
+        context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
+        runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
+
   secret-detection:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'secret-detection'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: gitleaks
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -60,6 +81,7 @@ jobs:
   static-code-analysis-csharp:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-csharp'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -77,6 +99,7 @@ jobs:
   static-code-analysis-go:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-go'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: gosec
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -94,6 +117,7 @@ jobs:
   static-code-analysis-java:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-java'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -111,6 +135,7 @@ jobs:
   static-code-analysis-js:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-js'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -128,6 +153,7 @@ jobs:
   static-code-analysis-kotlin:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-kotlin'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -145,6 +171,7 @@ jobs:
   static-code-analysis-python-semgrep:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-python-semgrep'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -162,6 +189,7 @@ jobs:
   static-code-analysis-scala:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-scala'
     runs-on: ubuntu-20.04
+    timeout-minutes: 20
     steps:
     - name: semgrep
       uses: jitsecurity-controls/jit-github-action@v2.2
@@ -171,6 +199,24 @@ jobs:
         
         security_control: ghcr.io/jitsecurity-controls/control-semgrep-alpine:main
         security_control_args: --json --config=/semgrep-scala-config.yml --metrics=off --severity=ERROR \${WORK_DIR:-.}
+        
+        dispatch_type: workflow
+        context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
+        runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
+
+  static-code-analysis-swift:
+    if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'static-code-analysis-swift'
+    runs-on: ubuntu-20.04
+    timeout-minutes: 20
+    steps:
+    - name: semgrep
+      uses: jitsecurity-controls/jit-github-action@v2.2
+      with:
+        docker_user: jit-bot
+        docker_password: ${{fromJSON(github.event.inputs.client_payload).payload.container_registry_token}}
+        
+        security_control: ghcr.io/jitsecurity-controls/control-semgrep-alpine:main
+        security_control_args: --json --config=/semgrep-swift-config.yml --metrics=off --severity=ERROR \${WORK_DIR:-.}
         
         dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
