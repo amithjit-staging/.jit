@@ -18,10 +18,3 @@ plan_items:
       tags:
       - staging
       trigger: deployment
-# resource_management:
-#   exclude:
-#     plan_items:
-#       item-secret-detection:
-#         resources:
-#           - name: demo-for-tests
-#             type: repo
