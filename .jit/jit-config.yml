@@ -23,4 +23,3 @@ resource_management:
     plan_items:
       item-secret-detection:
         resources:
-          - name: demo-for-tests
