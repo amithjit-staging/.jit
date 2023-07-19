@@ -25,10 +25,6 @@ override:
       jobs:
         static-code-analysis-python-semgrep:
           default: true
-          runner:
-            type: github_actions
-            setup:
-              checkout: true
           steps:
             - name: Run semgrep python
               uses: registry.jit.io/control-semgrep-alpine:latest
