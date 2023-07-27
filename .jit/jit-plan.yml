@@ -1,6 +1,5 @@
 name: My plan
 level: beginner
-update_id: e9aab0f3-aebf-48fa-b339-a0b382ce31ce
 author: Jit
 version: 0.1
 owners:
@@ -10,17 +9,19 @@ references:
 tags: []
 items:
   - name: Scan your code for vulnerabilities (SAST)
-    uses: jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
   - name: Scan your Dockerfiles for vulnerabilities
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
   - name: Scan your code dependencies for vulnerabilities (SCA)
     uses: jitsecurity-controls/jit-plans/items/code/item-dependency-check.yml@latest
-  - name: Scan your infrastructure-as-code (IaC) for misconfigurations
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-iac-misconfiguration-detection.yml@latest
   - name: Verify that MFA for your GitHub organization is enabled
-    uses: jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
   - name: Scan infrastructure for runtime misconfigurations (Azure)
-    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
+    uses: >-
+      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
   - name: Scan code for hard-coded secrets
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
@@ -29,9 +30,11 @@ override:
       jobs:
         static-code-analysis-python-semgrep:
           steps:
-          - name: Run semgrep python
-            uses: registry.jit.io/control-semgrep-alpine:latest
-            with:
-              args: --json --config=/semgrep-python-config.yml --metrics=off --severity=ERROR
-                --exclude-rule python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query
-                \${WORK_DIR:-.}
+            - name: Run semgrep python
+              uses: registry.jit.io/control-semgrep-alpine:latest
+              with:
+                args: >-
+                  --json --config=/semgrep-python-config.yml --metrics=off
+                  --severity=ERROR --exclude-rule
+                  python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query
+                  \${WORK_DIR:-.}
