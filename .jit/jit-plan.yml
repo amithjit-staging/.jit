@@ -23,13 +23,36 @@ items:
     uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
-    sast:
+    api-security:
       jobs:
-        static-code-analysis-python-semgrep:
+        api-security-detection:
+          runner:
+            setup:
+              checkout: false
+            type: github_actions
           steps:
-          - name: Run semgrep python
-            uses: registry.jit.io/control-semgrep-alpine:latest
-            with:
-              args: --json --config=/semgrep-python-config.yml --metrics=off --severity=ERROR
-                --exclude-rule python.sqlalchemy.security.sqlalchemy-execute-raw-query.sqlalchemy-execute-raw-query
-                \${WORK_DIR:-.}
+            - name: Run ZAP
+              uses: registry.jit.io/zap:not-hardened-gerneric-runner-zap
+              with:
+                env:
+                  AUTHENTICATION_VALUE: ${{ secrets.API_SCAN_AUTHENTICATION_VALUE }}
+    runtime-misconfiguration-detection-azure:
+      jobs:
+        runtime-misconfig-detection-azure:
+          runner:
+            setup:
+              checkout: false
+            type: github_actions
+          steps:
+            - name: Run Prowler For Azure
+              uses: registry.jit.io/prowler:latest
+    runtime-misconfiguration-detection-gcp:
+      jobs:
+        runtime-misconfig-detection-gcp:
+          runner:
+            setup:
+              checkout: false
+            type: github_actions
+          steps:
+            - name: Run Prowler
+              uses: registry.jit.io/prowler:latest
