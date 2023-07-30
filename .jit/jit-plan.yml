@@ -34,6 +34,12 @@ items:
     uses: jitsecurity-controls/jit-plans/items/runtime/item-api-security.yml@latest
 override:
   workflows:
+    enrichment-code:
+      jobs:
+        enrich:
+          steps:
+            - name: Run code enrichment
+              uses: registry.jit.io/control-enrichment-slim:latest
     api-security:
       jobs:
         api-security-detection:
