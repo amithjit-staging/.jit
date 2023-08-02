@@ -1,5 +1,6 @@
 name: My plan
 level: beginner
+update_id: c8f56e6c-39d2-4655-8666-4480db315b77
 author: Jit
 version: 0.1
 owners:
@@ -8,38 +9,26 @@ references:
   - https://www.jit.io
 tags: []
 items:
-  - name: Scan your code for vulnerabilities (SAST)
-    uses: >-
-      jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
-  - name: Scan your Dockerfiles for vulnerabilities
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
-  - name: Scan your code dependencies for vulnerabilities (SCA)
-    uses: jitsecurity-controls/jit-plans/items/code/item-dependency-check.yml@latest
-  - name: Verify that MFA for your GitHub organization is enabled
-    uses: >-
-      jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
-  - name: Scan infrastructure for runtime misconfigurations (Azure)
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
-  - name: Scan code for hard-coded secrets
-    uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
-  - name: Scan your infrastructure-as-code (IaC) for misconfigurations
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-iac-misconfiguration-detection.yml@latest
-  - name: Scan infrastructure for runtime misconfigurations (GCP)
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
   - name: Scan your API for vulnerabilities
     uses: jitsecurity-controls/jit-plans/items/runtime/item-api-security.yml@latest
+  - name: Scan your code for vulnerabilities (SAST)
+    uses: jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
+  - name: Scan your Dockerfiles for vulnerabilities
+    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
+  - name: Scan your code dependencies for vulnerabilities (SCA)
+    uses: jitsecurity-controls/jit-plans/items/code/item-dependency-check.yml@latest
+  - name: Scan your infrastructure-as-code (IaC) for misconfigurations
+    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-iac-misconfiguration-detection.yml@latest
+  - name: Verify that MFA for your GitHub organization is enabled
+    uses: jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
+  - name: Scan infrastructure for runtime misconfigurations (Azure)
+    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
+  - name: Scan infrastructure for runtime misconfigurations (GCP)
+    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
+  - name: Scan code for hard-coded secrets
+    uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
-    enrichment-code:
-      jobs:
-        enrich:
-          steps:
-            - name: Run code enrichment
-              uses: registry.jit.io/control-enrichment-slim:latest
     api-security:
       jobs:
         api-security-detection:
@@ -48,11 +37,17 @@ override:
               checkout: false
             type: github_actions
           steps:
-            - name: Run ZAP
-              uses: registry.jit.io/zap:not-hardened-gerneric-runner-zap
-              with:
-                env:
-                  AUTHENTICATION_VALUE: ${{ secrets.API_SCAN_AUTHENTICATION_VALUE }}
+          - name: Run ZAP
+            uses: registry.jit.io/zap:not-hardened-gerneric-runner-zap
+            with:
+              env:
+                AUTHENTICATION_VALUE: ${{ secrets.API_SCAN_AUTHENTICATION_VALUE }}
+    enrichment-code:
+      jobs:
+        enrich:
+          steps:
+          - name: Run code enrichment
+            uses: registry.jit.io/control-enrichment-slim:latest
     runtime-misconfiguration-detection-azure:
       jobs:
         runtime-misconfig-detection-azure:
@@ -61,8 +56,8 @@ override:
               checkout: false
             type: github_actions
           steps:
-            - name: Run Prowler For Azure
-              uses: registry.jit.io/prowler:latest
+          - name: Run Prowler For Azure
+            uses: registry.jit.io/prowler:latest
     runtime-misconfiguration-detection-gcp:
       jobs:
         runtime-misconfig-detection-gcp:
@@ -71,5 +66,5 @@ override:
               checkout: false
             type: github_actions
           steps:
-            - name: Run Prowler
-              uses: registry.jit.io/prowler:latest
+          - name: Run Prowler
+            uses: registry.jit.io/prowler:latest
