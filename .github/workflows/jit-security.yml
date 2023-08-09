@@ -20,7 +20,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/zap:not-hardened-gerneric-runner-zap
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         inline_environment: -e AUTHENTICATION_VALUE="${{ secrets.API_SCAN_AUTHENTICATION_VALUE }}"
@@ -34,7 +33,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-trivy-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -47,7 +45,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-enrichment-slim:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -61,7 +58,6 @@ jobs:
       with:
         security_control: registry.jit.io/control-kics-alpine:main
         security_control_output_file: /code/jit-report/results.json
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -75,7 +71,6 @@ jobs:
       with:
         security_control: registry.jit.io/control-kics-alpine:main
         security_control_output_file: /code/jit-report/results.json
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -89,7 +84,6 @@ jobs:
       with:
         security_control: registry.jit.io/control-kics-alpine:main
         security_control_output_file: /code/jit-report/results.json
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -103,7 +97,6 @@ jobs:
       with:
         security_control: registry.jit.io/open-remediation-pr-alpine:main
         security_control_output_file: /opt/code/jit-report/results.json
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         inline_environment: -e GITHUB_TOKEN="${{fromJSON(github.event.inputs.client_payload).payload.github_token}}"
@@ -117,7 +110,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/prowler:latest
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -130,7 +122,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/prowler:latest
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -144,7 +135,6 @@ jobs:
       with:
         security_control: registry.jit.io/control-gitleaks-alpine:main
         security_control_output_file: /tmp/report.json
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -157,7 +147,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-nancy-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -171,7 +160,6 @@ jobs:
       with:
         security_control: registry.jit.io/control-npm-audit-slim:main
         security_control_output_file: /code/jit-report/enriched-audit-results.json
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -185,7 +173,6 @@ jobs:
       with:
         security_control: registry.jit.io/control-osv-scanner-alpine:main
         security_control_output_file: /code/jit-report/osv-scanner-results.json
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -199,7 +186,6 @@ jobs:
       with:
         security_control: registry.jit.io/control-osv-scanner-alpine:main
         security_control_output_file: /code/jit-report/enriched-osv-scanner-results.json
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -212,7 +198,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -225,7 +210,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-gosec-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -238,7 +222,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -251,7 +234,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -264,7 +246,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -277,7 +258,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -290,7 +270,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -303,7 +282,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -316,7 +294,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
@@ -329,7 +306,6 @@ jobs:
       uses: jitsecurity-controls/jit-github-action@v3.0.1
       with:
         security_control: registry.jit.io/control-semgrep-alpine:main
-        dispatch_type: workflow
         context: ${{toJSON(fromJSON(github.event.inputs.client_payload).context)}}
         runner_setup: ${{toJSON(fromJSON(github.event.inputs.client_payload).context.job.runner.setup)}}
         
