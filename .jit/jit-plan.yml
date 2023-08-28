@@ -51,10 +51,10 @@ override:
     runtime-misconfiguration-detection-azure:
       jobs:
         runtime-misconfig-detection-azure:
-          runner:
-            setup:
-              checkout: false
-            type: github_actions
+          # runner:
+          #   setup:
+          #     checkout: false
+          #   type: github_actions
           steps:
           - name: Run Prowler For Azure
             uses: registry.jit.io/prowler:latest
