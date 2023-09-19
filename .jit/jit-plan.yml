@@ -1,6 +1,6 @@
 name: My plan
 level: beginner
-update_id: 2ba90265-6873-464e-bd53-1e1a03110124
+update_id: 4b629276-fa6b-4ca2-9886-2375ef965359
 author: Jit
 version: 0.1
 owners:
@@ -25,8 +25,6 @@ items:
     uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
   - name: Scan infrastructure for runtime misconfigurations (GCP)
     uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
-  # - name: Scan code for hard-coded secrets
-  #   uses: jitsecurity-controls/jit-plans/items/code/item-secret-detection.yml@latest
 override:
   workflows:
     api-security:
@@ -51,10 +49,6 @@ override:
     runtime-misconfiguration-detection-azure:
       jobs:
         runtime-misconfig-detection-azure:
-          # runner:
-          #   setup:
-          #     checkout: false
-          #   type: github_actions
           steps:
           - name: Run Prowler For Azure
             uses: registry.jit.io/prowler:latest
