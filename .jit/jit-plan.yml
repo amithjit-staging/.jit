@@ -58,7 +58,7 @@ override:
             uses: registry.jit.io/prowler:not-hardened-main
     runtime-misconfiguration-detection-gcp:
       jobs:
-        # runtime-misconfig-detection-gcp:
+        runtime-misconfig-detection-gcp:
         #   runner:
         #     setup:
         #       checkout: false
