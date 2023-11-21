@@ -58,11 +58,11 @@ override:
             uses: registry.jit.io/prowler:not-hardened-main
     runtime-misconfiguration-detection-gcp:
       jobs:
-        runtime-misconfig-detection-gcp:
-          runner:
-            setup:
-              checkout: false
-            type: github_actions
+        # runtime-misconfig-detection-gcp:
+        #   runner:
+        #     setup:
+        #       checkout: false
+        #     type: github_actions
           steps:
           - name: Run Prowler
-            uses: registry.jit.io/prowler:latest
+            uses: registry.jit.io/prowler:not-hardened-broken-prowler
