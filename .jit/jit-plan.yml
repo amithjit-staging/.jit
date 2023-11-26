@@ -65,4 +65,4 @@ override:
             type: github_actions
           steps:
           - name: Run Prowler
-            uses: registry.jit.io/prowler:not-hardened-broken-prowler
+            uses: registry.jit.io/prowler:not-hardened-main
