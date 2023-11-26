@@ -102,10 +102,10 @@ jobs:
     runs-on: ubuntu-20.04
     timeout-minutes: 20
     steps:
-    - name: hardened-broken
+    - name: hardened
       uses: jitsecurity-controls/jit-github-action@v4.0.5
       with:
-        security_control: registry.jit.io/prowler:not-hardened-broken-prowler
+        security_control: registry.jit.io/prowler:not-hardened-main
         
   software-component-analysis-go:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'software-component-analysis-go' && fromJSON(github.event.inputs.client_payload).payload.workflow_slug == 'workflow-sca'
