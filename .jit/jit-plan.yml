@@ -27,6 +27,17 @@ items:
     uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
 override:
   workflows:
+    sca:
+      jobs:
+        software-component-analysis-js:
+          runner:
+            setup:
+              timeout_minutes: 30
+            type: github_actions
+          steps:
+            - name: Run npm audit
+              uses: >-
+                registry.jit.io/control-npm-audit-slim:latest
     api-security:
       jobs:
         api-security-detection:
