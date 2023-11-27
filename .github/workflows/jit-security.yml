@@ -120,12 +120,12 @@ jobs:
   software-component-analysis-js:
     if: fromJSON(github.event.inputs.client_payload).payload.workflow_job_name == 'software-component-analysis-js' && fromJSON(github.event.inputs.client_payload).payload.workflow_slug == 'workflow-sca'
     runs-on: ubuntu-20.04
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
     - name: npm-audit
       uses: jitsecurity-controls/jit-github-action@v4.0.5
       with:
-        security_control: registry.jit.io/control-npm-audit-slim:main
+        security_control: registry.jit.io/control-npm-audit-slim:latest
         security_control_output_file: /code/jit-report/enriched-audit-results.json
         
   software-component-analysis-php:
