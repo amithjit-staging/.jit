@@ -1,5 +1,6 @@
 name: My plan
 level: beginner
+update_id: 076c0307-ae46-41ee-89da-38a0fc8f51b4
 author: Jit
 version: 0.1
 owners:
@@ -11,28 +12,21 @@ items:
   - name: Scan your API for vulnerabilities
     uses: jitsecurity-controls/jit-plans/items/runtime/item-api-security.yml@latest
   - name: Scan your code for vulnerabilities (SAST)
-    uses: >-
-      jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
+    uses: jitsecurity-controls/jit-plans/items/code/item-code-vulnerability.yml@latest
   - name: Scan your Dockerfiles for vulnerabilities
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
+    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-container-scan.yml@latest
   - name: Scan your code dependencies for vulnerabilities (SCA)
     uses: jitsecurity-controls/jit-plans/items/code/item-dependency-check.yml@latest
   - name: Scan your infrastructure-as-code (IaC) for misconfigurations
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-iac-misconfiguration-detection.yml@latest
+    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-iac-misconfiguration-detection.yml@latest
   - name: Verify that MFA for your GitHub organization is enabled
-    uses: >-
-      jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
+    uses: jitsecurity-controls/jit-plans/items/third_party_app/item-mfa-scm.yml@latest
   - name: Scan infrastructure for runtime misconfigurations (Azure)
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
+    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-azure.yml@latest
   - name: Scan infrastructure for runtime misconfigurations (GCP)
-    uses: >-
-      jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
+    uses: jitsecurity-controls/jit-plans/items/infrastructure/item-runtime-misconfiguration-detection-gcp.yml@latest
   - name: Generate a Software Bill of Materials (SBOM)
-    uses: >-
-      jitsecurity-controls/jit-plans/items/code/item-software-bill-of-materials.yml@latest
+    uses: jitsecurity-controls/jit-plans/items/code/item-software-bill-of-materials.yml@latest
 override:
   workflows:
     api-security:
@@ -43,17 +37,17 @@ override:
               checkout: false
             type: github_actions
           steps:
-            - name: Run ZAP
-              uses: registry.jit.io/zap:not-hardened-gerneric-runner-zap
-              with:
-                env:
-                  AUTHENTICATION_VALUE: ${{ secrets.API_SCAN_AUTHENTICATION_VALUE }}
+          - name: Run ZAP
+            uses: registry.jit.io/zap:not-hardened-gerneric-runner-zap
+            with:
+              env:
+                AUTHENTICATION_VALUE: ${{ secrets.API_SCAN_AUTHENTICATION_VALUE }}
     enrichment-code:
       jobs:
         enrich:
           steps:
-            - name: Run code enrichment
-              uses: registry.jit.io/control-enrichment-slim:latest
+          - name: Run code enrichment
+            uses: registry.jit.io/control-enrichment-slim:latest
     runtime-misconfiguration-detection-azure:
       jobs:
         runtime-misconfig-detection-azure:
@@ -62,8 +56,8 @@ override:
               checkout: false
             type: github_actions
           steps:
-            - name: Run Prowler For Azure
-              uses: registry.jit.io/prowler:not-hardened-main
+          - name: Run Prowler For Azure
+            uses: registry.jit.io/prowler:not-hardened-main
     runtime-misconfiguration-detection-gcp:
       jobs:
         runtime-misconfig-detection-gcp:
@@ -72,8 +66,8 @@ override:
               checkout: false
             type: github_actions
           steps:
-            - name: Run Prowler
-              uses: registry.jit.io/prowler:not-hardened-main
+          - name: Run Prowler
+            uses: registry.jit.io/prowler:not-hardened-main
     sca:
       jobs:
         software-component-analysis-js:
@@ -82,5 +76,5 @@ override:
               timeout_minutes: 30
             type: github_actions
           steps:
-            - name: Run npm audit
-              uses: registry.jit.io/control-npm-audit-slim:latest
+          - name: Run npm audit
+            uses: registry.jit.io/control-npm-audit-slim:latest
